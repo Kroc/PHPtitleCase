@@ -25,7 +25,8 @@ function titleCase ($title) {
 		//(never on the first word, and never if preceded by a colon)
 		$m = $i>0 && mb_substr ($title, max (0, $i-2), 1, 'UTF-8') !== ':' && 
 			!preg_match ('/[\x{2014}\x{2013}] ?/u', mb_substr ($title, max (0, $i-2), 2, 'UTF-8')) && 
-			 preg_match ('/^(a(nd?|s|t)?|b(ut|y)|en|for|i[fn]|o[fnr]|t(he|o)|vs?\.?|via)[ \-]/i', $m)
+			 preg_match ('/^(a(nd?|s|t)?|b(ut|y)|en|for|i[fn]|o[fnr]|t(he|o)|vs?\.?|via)[ \-]/i', $m) ||
+			preg_match( '/\'(s|t|ll|re|ve|d|m|em)/i', $m ) // Don't capitalize contractions
 		?	//…and convert them to lowercase
 			mb_strtolower ($m, 'UTF-8')
 			
